@@ -1,95 +1,69 @@
-# MSU-IIT BSCS Thesis LaTeX Template
+# Preamble
 
-This repository contains the official LaTeX template for the Bachelor of Science in Computer Science (BSCS) thesis at Mindanao State University - Iligan Institute of Technology (MSU-IIT). It is designed to help students produce a well-formatted thesis document that complies with MSU-IIT formatting guidelines.
+Before embarking on this journey, I suggest you read my [LaTeX](https://bitsilla.com/blog/2019/01/latex-tips-for-your-dissertation-or-project-write-up/) and [content](https://bitsilla.com/blog/2019/03/content-tips-for-your-dissertation-or-project-write-up/) tips.
 
----
+# University of Malta &ndash; LaTeX Dissertation (or Thesis) Template
 
-## Features
+Let us not waste any time, you have a project to write up!  [Here](https://github.com/jp-um/university_of_malta_LaTeX_dissertation_template/blob/master/dissertation_main.pdf) is a complete example (PDF format) of what this LaTeX template looks like.  Or quicker...
 
-- Structured chapters including Abstract, Introduction, Review of Literature, Methodology, Results, and Conclusion  
-- Formatted front matter: title page, approval sheet, acknowledgments, and dedication  
-- Automated Table of Contents, List of Figures, and List of Tables  
-- Supports bibliography management with BibTeX  
-- Modular file organization for easy editing  
-- Compatible with popular LaTeX distributions and editors (TeX Live, MiKTeX, Overleaf, TeXstudio)  
+<img src="images/pg1.png" width="400"><img src="images/pg2.png" width="400">
+<img src="images/pg3.png" width="400"><img src="images/pg4.png" width="400">
 
----
+Now back to the boring bits ...
 
-## Repository Structure
+A modern, highly configurable assignment/project/fyp/dissertation/thesis template for the University of Malta.  (In reality, there is nothing specific to the University of Malta, and this LaTeX class may be used anywhere).  This template is loosely based on my D.Phil. Thesis at the University of Oxford, which was loosely based on ...  You get the drift.
+
+This template was clearly needed, as I keep correcting/examining poorly and inconsistently formatted dissertations all the time.  Updates to the template with examples (2-page landscape table anyone?) are greatly appreciated -- either through pull requests, github issues or emails (jean.p.ebejer@um.edu.mt).
+
+The main file is `dissertation_main.tex`, and this will show you how to organise your dissertation.  Basically replace all `\blindtext` commands with your content and you are there, ready to print.  This is obviously a case of something more easily said than done.
+
+I am also keen on keeping an FAQ with the most common LaTeX problems, which you are bound to face on the night before your submission deadline.
+
+## FAQ
+
+### What is the difference (if any) between a thesis and a dissertation?
+
+> University of Malta regulations specify a thesis only in case of PhD, and SThD degrees.  In all other cases it is a dissertation.
+
+Bet you didn't know this one bit of academic trivia!  (Note: The answer is specific to the University of Malta, answer given by our dear registrar, Ms Veronica Grech).
+
+### May I use this template for my assignment?  What changes do I need?
+
+You must, not should!  You should view any written submission as a training opportunity for your final dissertation.  Getting familiar with the template will help you out later in the course.  Of course, some (very) minor changes to the template are required; as follows:
+
+- From `dissertation_main.tex` comment out (`%`) frontmatter sections for originality, dedication, acknowledgements, and abstract (these would look silly in an assignment).  
+- Also, from the same file `dissertation_main.tex` comment out all the appendix material (unless you actually have an appendix; unlikely)
+
+(Let me know if any more changes are required)
+
+### But how do I use (build) this?
+
+Well, this is the sort of thing your supervisor would expect you to find out on your own.  However, you can either use a GUI like ~~TexMaker (this is what I use) or~~ TexStudio.  Or if you are so inclined, to build your document from the command line (in the directory where `dissertation_main.tex` resides):
 
 ```
-MSU-IIT-BSCS-Thesis-Template/
-├── main.tex               # Primary LaTeX file to compile the thesis
-├── preamble.tex           # Formatting setup and package imports
-├── frontmatter/
-│   ├── titlepage.tex
-│   ├── approvalsheet.tex
-│   ├── dedication.tex
-│   └── acknowledgments.tex
-├── chapters/
-│   ├── abstract.tex
-│   ├── introduction.tex
-│   ├── review_of_literature.tex
-│   ├── methodology.tex
-│   ├── results.tex
-│   ├── conclusion.tex
-│   └── references.bib
-├── images/                # Figures and graphs
-└── tables/                # Tables and data visuals
+latexmk -pdf
 ```
 
----
+This generates a lot of clutter, but it is important to go through it as some warnings can give you valuable insight on stuff to fix for a perfect presentation. To clean all the LaTeX generated files:
 
-## Getting Started
+```
+latexmk -c
+```
 
-### Prerequisites
+Note that this will leave the generated `pdf` file, as is desirable most of the cases.
 
-- LaTeX distribution installed (TeX Live, MiKTeX, or MacTeX)  
-- LaTeX editor (e.g., Overleaf, TeXstudio, VS Code with LaTeX extension)  
-- BibTeX for managing references  
+### I am a foe of the environment, and don't want to double side print -- how do I fix this?
 
-### How to Use
+Well, first of all, **you moron**.  Secondly, by default the template uses two-sided printing settings (margins, recto openings for chapters, table of contents,  etc.).  If you want to change that, simply pass `oneside` as an option to the document class (as opposed to `twoside`).  I suggest you use double-sided layout and printing when you print the examiner's copy (we hate carrying thick manuscripts around) and single sided when you've handed in your corrections, and given out your final copies (to the library, to your supervisors, etc.).
 
-1. Clone the repository: `git clone https://github.com/yourusername/MSU-IIT-BSCS-Thesis-Template.git`
-2. Open `main.tex` in your LaTeX editor.  
-3. Customize the front matter files with your personal and thesis details.  
-4. Write your thesis content in the respective chapter files inside the `chapters/` folder.  
-5. Compile the thesis document.  
+### Why are there so many blank pages?
 
----
+First, blank pages are only generated with the `twopage` option.  This is because typesetters don't start new chapters (and abstracts/acknowledgements/etc.) on the *verso* side (left in the western-world) when using both sides of the paper.  Chapters start on the *recto* side (right), so an empty page is inserted if the chapter start falls on the *verso* side (left).  The `onepage` option clearly has no empty pages (or has blank pages at the back of each paper, so every *verso* page is empty).  Note that the page margins are different for the *recto* and *verso* sides in the `twopage` option, this is because of the spline (which is on the right for *verso* and left for *recto*).  I hope this is clear, I am an amateur typesetter.
 
-## Compilation Instructions
+### My supervisor(s) says section X should be named Y.  What should I do?
 
-For local compilation, run the following commands in your terminal:
+It is always counter-productive to **not** listen to your supervisor.  This is a generic template, and your specific use-case may have different requirements.  For example, in some departments it is common to have a "Methodology" section instead of the (more experimental) "Materials & Methods".  Elsewhere, the "Evaluation" section is sometimes merged in the "Results and Discussion" chapter.  Some faculties require a standard cover page.  This template is very flexible, and any changes are easy/trivial to make.  The important thing is to use good judgement and that **you follow your supervisor's advice**.
 
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+### For references, which is better [42] or [Ebejer et al., 2019]?
 
-
-On Overleaf or similar online editors, simply open `main.tex` and click the compile button.
-
----
-
-## Customization
-
-- Modify `preamble.tex` to adjust margins, fonts, or add new packages.  
-- Add or remove chapters by creating `.tex` files in the `chapters/` folder and including them in `main.tex`.  
-- Add images to the `images/` folder and reference them in your chapters using LaTeX commands like `\includegraphics{images/filename}`.  
-- Manage your bibliography by editing the `references.bib` file with BibTeX entries.
-
----
-
-## License
-
-This template is released under the MIT License. Feel free to use, modify, and distribute this template with proper attribution.
-
----
-
-## Acknowledgments
-
-Thanks to the MSU-IIT Computer Science faculty and thesis advisers for the formatting guidelines that inspired this template. This project aims to simplify thesis writing for BSCS students.
-
-
-
+Many computational scientists are used to the IEEE referencing style with numbers, i.e. `[42]`.  But there is a reason why `plannat` is superior.  Your examiners (and supervisors) will be well aquainted with the research area and will know which are the main papers you should have read (and cited).  If you use the numbered referencing, the examiner has to keep cross-referencing the *References* section.  This is not the case when using the name of the author and year directly in the citation.  Moreover, it is easier for the examiner to realize when you are mis-citing an author.  Modern typsetting is moving in this direction.
